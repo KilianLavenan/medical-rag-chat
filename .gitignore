@@ -1,0 +1,12 @@
+# Environnements virtuels
+.venv/
+
+# Dépendances / lock caches (uv, pip, etc.)
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.installed.cfg
+
+# Bases de données locales
+data/chroma/

@@ -1,0 +1,36 @@
+[project]
+name = "medical-rag-chat"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "chromadb>=1.0.20",
+    "docx2txt>=0.9",
+    "fastapi>=0.116.1",
+    "langchain>=0.3.27",
+    "langchain-community>=0.3.29",
+    "sentence-transformers>=5.1.0",
+    "uvicorn[standard]>=0.35.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.17.1",
+    "pre-commit>=4.3.0",
+    "ruff>=0.12.12",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+lint.select = ["E","F","I","UP","B","PL"]
+format.quote-style = "double"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+pretty = true

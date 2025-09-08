@@ -1,9 +1,15 @@
 import base64
 import os
 import re
+import sys
 from pathlib import Path
 from typing import Any
 
+try:
+    __import__("pysqlite3")
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
 import chromadb
 from docx import Document
 from docx.table import Table

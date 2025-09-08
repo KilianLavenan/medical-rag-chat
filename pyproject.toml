@@ -6,12 +6,11 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "chromadb>=1.0.20",
-    "docx2txt>=0.9",
-    "fastapi>=0.116.1",
-    "langchain>=0.3.27",
-    "langchain-community>=0.3.29",
+    "gradio>=5.44.1",
+    "openai>=1.106.1",
+    "python-docx>=1.2.0",
+    "python-dotenv>=1.1.1",
     "sentence-transformers>=5.1.0",
-    "uvicorn[standard]>=0.35.0",
 ]
 
 [dependency-groups]
@@ -22,10 +21,17 @@ dev = [
 ]
 
 [tool.ruff]
-line-length = 100
+line-length = 200
 target-version = "py311"
-lint.select = ["E","F","I","UP","B","PL"]
-format.quote-style = "double"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.ruff.lint]
+ignore = ["PLR0912"]
+select = ["E","F","I","UP","B","PL"]
 
 [tool.mypy]
 python_version = "3.11"

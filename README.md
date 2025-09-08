@@ -26,28 +26,29 @@ This repository demonstrates a complete RAG implementation:
 - 🖼 **Image interpretation:** Summarizes diagrams using GPT-4o-mini vision capabilities.  
 - 📚 **Vector database (ChromaDB):** Stores embeddings for semantic search.  
 - 💬 **Chat interface:** Interactive QA system with contextual memory (streamlit interface).  
-- 🚀 **Deployment-ready:** Runs locally or deployable on Hugging Face Spaces.  
+- 🚀 **Deployment-ready:** Runs locally or deployable on Streamlit.  
 
 ---
 
 ## 📂 Project Structure
 
 medical-rag-chat/
-├── app/
-│ ├── init.py
-│ ├── app.py # streamlit interface (main entry point)
-│ ├── indexing.py # DOCX ingestion, chunking, embeddings, ChromaDB storage
-│ └── query.py # Querying ChromaDB + building prompts
-├── data/
-│ ├── Prise en charge des Pneumopathies aigues communautaires V2.docx # Medical guideline (tracked via Git LFS)
-│ ├── extracted_image.png # Extracted organigram image from DOCX
-│ └── chroma_db/ # Persistent ChromaDB vector store
-├── .env # Environment variables (e.g., OpenAI API key)
-├── .gitattributes # Git LFS tracking configuration
-├── .gitignore # Ignored files/folders
-├── pyproject.toml # Project dependencies and configuration
-├── README.md # Project documentation
-└── requirements.txt # Optional: alternative dependency list
+├── app/                                    # Application principale
+│   ├── __init__.py                         # Package marker
+│   ├── app.py                             # Interface Streamlit (point d'entrée)
+│   ├── indexing.py                        # Ingestion DOCX, chunking, embeddings, ChromaDB
+│   └── query.py                           # Requêtes ChromaDB + construction prompts
+├── data/                                   # Données médicales
+│   ├── Prise en charge des Pneumopathies  # Guide médical officiel
+│   │   aigues communautaires V2.docx      # (suivi via Git LFS)
+│   ├── extracted_image.png                # Organigramme extrait du DOCX
+│   └── chroma_db/                         # Base vectorielle ChromaDB persistante
+├── .env                                    # Variables d'environnement (clé API OpenAI)
+├── .gitattributes                          # Configuration Git LFS
+├── .gitignore                              # Fichiers/dossiers ignorés
+├── pyproject.toml                          # Dépendances et configuration projet
+├── README.md                               # Documentation projet
+└── requirements.txt                        # Liste alternative des dépendances
 ## ⚙️ Installation
 
 1. Clone the repository:
@@ -61,7 +62,7 @@ medical-rag-chat/
 ## ▶️ Usage
 
 You can use the chatbot in **two different ways**:  
-either **locally on your computer** or directly on **Hugging Face Spaces**.
+either **locally on your computer** or directly on **Streamlit**.
 
 ---
 
@@ -71,14 +72,14 @@ either **locally on your computer** or directly on **Hugging Face Spaces**.
 
 2. launch the streamlit interface:
    ```bash
-   uv run python app/app.py
+   uv run streamlit run app/app.py
 
-Then open http://localhost:7860 in your browser.
+Then open http://localhost:8501 in your browser.
 
-### 🔹 Option 2: Use Hugging Face Spaces
+### 🔹 Option 2: Use Streamlit
 
-Go to the project’s Space on Hugging Face:
-👉 https://huggingface.co/spaces/<username>/medical-rag-chat
+Go to the page on Streamlit cloud:
+https://kilianlavenan-medical-rag-chat-appapp-pk464n.streamlit.app/
 
 The chatbot will launch directly in your browser with the streamlit interface.
 No installation required, just type your medical question and get an answer.

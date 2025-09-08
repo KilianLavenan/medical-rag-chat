@@ -30,25 +30,6 @@ This repository demonstrates a complete RAG implementation:
 
 ---
 
-## 📂 Project Structure
-
-medical-rag-chat/
-├── app/                                    # Application principale
-│   ├── __init__.py                         # Package marker
-│   ├── app.py                             # Interface Streamlit (point d'entrée)
-│   ├── indexing.py                        # Ingestion DOCX, chunking, embeddings, ChromaDB
-│   └── query.py                           # Requêtes ChromaDB + construction prompts
-├── data/                                   # Données médicales
-│   ├── Prise en charge des Pneumopathies  # Guide médical officiel
-│   │   aigues communautaires V2.docx      # (suivi via Git LFS)
-│   ├── extracted_image.png                # Organigramme extrait du DOCX
-│   └── chroma_db/                         # Base vectorielle ChromaDB persistante
-├── .env                                    # Variables d'environnement (clé API OpenAI)
-├── .gitattributes                          # Configuration Git LFS
-├── .gitignore                              # Fichiers/dossiers ignorés
-├── pyproject.toml                          # Dépendances et configuration projet
-├── README.md                               # Documentation projet
-└── requirements.txt                        # Liste alternative des dépendances
 ## ⚙️ Installation
 
 1. Clone the repository:

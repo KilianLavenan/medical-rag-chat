@@ -10,10 +10,10 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_API_KEY)
 
-indexing.main()
-
 
 def simple_chat(message: str, history: list[tuple[str, str]]) -> str:
+    indexing.main()
+
     """
     Handle a conversational turn with memory using the OpenAI chat model.
     Args:

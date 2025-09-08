@@ -1,10 +1,10 @@
 import os
 
 import gradio as gr
-import indexing
-import query
 from dotenv import load_dotenv
 from openai import OpenAI
+
+from app import indexing, query
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")

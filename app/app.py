@@ -1,19 +1,29 @@
 import os
 
-import gradio as gr
+import indexing
+import query
+import streamlit as st
 from dotenv import load_dotenv
 from openai import OpenAI
-
-from app import indexing, query
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_API_KEY)
 
+st.set_page_config(page_title="Medical RAG Chatbot", page_icon="🩺", layout="centered")
 
-def simple_chat(message: str, history: list[tuple[str, str]]) -> str:
-    indexing.main()
 
+@st.cache_resource  # type: ignore
+def init_indexing() -> bool:
+    try:
+        indexing.main()
+        return True
+    except Exception as e:
+        st.error(f"Erreur lors de l'initialisation: {e}")
+        return False
+
+
+def generate_response(message: str, history: list[tuple[str, str]]) -> str:
     """
     Handle a conversational turn with memory using the OpenAI chat model.
     Args:
@@ -40,10 +50,37 @@ def simple_chat(message: str, history: list[tuple[str, str]]) -> str:
     return response_text  # type: ignore
 
 
-with gr.Blocks() as demo:
-    gr.Markdown("# 🩺 Medical RAG Chatbot")
-    gr.ChatInterface(fn=simple_chat)
+def main() -> None:
+    st.title("🩺 Medical RAG Chatbot")
+    st.markdown("Assistant médical spécialisé dans les pneumopathies communautaires")
+
+    if "indexing_initialized" not in st.session_state:
+        with st.spinner("Initialisation du système RAG..."):
+            st.session_state.indexing_initialized = init_indexing()
+
+    if not st.session_state.indexing_initialized:
+        st.error("Impossible d'initialiser le système. Veuillez recharger la page.")
+        return
+
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+        st.session_state.messages.append({"role": "assistant", "content": "Bonjour ! Je suis votre assistant médical spécialisé dans les pneumopathies communautaires. Comment puis-je vous aider ?"})
+
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    if prompt := st.chat_input("Posez votre question ici..."):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        with st.chat_message("assistant"):
+            with st.spinner("Recherche dans la base de connaissances..."):
+                response = generate_response(prompt, st.session_state.messages[:-1])
+            st.markdown(response)
+            st.session_state.messages.append({"role": "assistant", "content": response})
+
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", "7860"))
-    demo.launch(server_name="0.0.0.0", server_port=port)
+    main()

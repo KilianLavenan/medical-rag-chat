@@ -15,7 +15,7 @@ This repository demonstrates a complete RAG implementation:
 - **Data Handling:** Cleans, chunks, and embeds the docx data with Sentence Transformers.  
 - **Retrieval & Query Processing:** Stores embeddings in ChromaDB and retrieves context for user queries.  
 - **Response Generation:** Constructs a contextual prompt for OpenAI’s GPT and generates answers. 
-- **Chatbot Interface:** Provides a user-friendly interface using gradio.    
+- **Chatbot Interface:** Provides a user-friendly interface using streamlit.    
 
 ---
 
@@ -25,7 +25,7 @@ This repository demonstrates a complete RAG implementation:
 - 📑 **Table summarization:** Converts tables into readable narrative text.  
 - 🖼 **Image interpretation:** Summarizes diagrams using GPT-4o-mini vision capabilities.  
 - 📚 **Vector database (ChromaDB):** Stores embeddings for semantic search.  
-- 💬 **Chat interface:** Interactive QA system with contextual memory (Gradio interface).  
+- 💬 **Chat interface:** Interactive QA system with contextual memory (streamlit interface).  
 - 🚀 **Deployment-ready:** Runs locally or deployable on Hugging Face Spaces.  
 
 ---
@@ -33,23 +33,21 @@ This repository demonstrates a complete RAG implementation:
 ## 📂 Project Structure
 
 medical-rag-chat/
-│
 ├── app/
-│ ├── indexing.py # Extracts text, tables, and images → chunks → vector database
-│ ├── query.py # Query ChromaDB and generate answers
-│ ├── app.py # Gradio-based user interface
-│
+│ ├── init.py
+│ ├── app.py # streamlit interface (main entry point)
+│ ├── indexing.py # DOCX ingestion, chunking, embeddings, ChromaDB storage
+│ └── query.py # Querying ChromaDB + building prompts
 ├── data/
-│ ├── Prise en charge des Pneumopathies aigues communautaires V2.docx
-│ ├── extracted_image.png # Image inside docx (extracted at runtime)
-│ └── chroma_db/ # Persistent ChromaDB vector database (generated at runtime)
-│
-├── .env # Stores your API key (ignored by git)
-├── .gitignore
-├── .pre-commit-config.yaml 
+│ ├── Prise en charge des Pneumopathies aigues communautaires V2.docx # Medical guideline (tracked via Git LFS)
+│ ├── extracted_image.png # Extracted organigram image from DOCX
+│ └── chroma_db/ # Persistent ChromaDB vector store
+├── .env # Environment variables (e.g., OpenAI API key)
+├── .gitattributes # Git LFS tracking configuration
+├── .gitignore # Ignored files/folders
 ├── pyproject.toml # Project dependencies and configuration
-├── README.md
-
+├── README.md # Project documentation
+└── requirements.txt # Optional: alternative dependency list
 ## ⚙️ Installation
 
 1. Clone the repository:
@@ -71,7 +69,7 @@ either **locally on your computer** or directly on **Hugging Face Spaces**.
 
 1. Make sure you installed the dependencies and set your `OPENAI_API_KEY` in a `.env` file (see [Installation](#installation)).
 
-2. launch the Gradio interface:
+2. launch the streamlit interface:
    ```bash
    uv run python app/app.py
 
@@ -82,7 +80,7 @@ Then open http://localhost:7860 in your browser.
 Go to the project’s Space on Hugging Face:
 👉 https://huggingface.co/spaces/<username>/medical-rag-chat
 
-The chatbot will launch directly in your browser with the Gradio interface.
+The chatbot will launch directly in your browser with the streamlit interface.
 No installation required, just type your medical question and get an answer.
 
 On Spaces, the embeddings are precomputed so you can start chatting immediately.

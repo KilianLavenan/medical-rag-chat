@@ -10,8 +10,8 @@ __pycache__/
 .installed.cfg
 
 # Bases de données locales
-# data/chroma_db/
-# data/*.png
+data/chroma_db/
+data/*.png
 
 # Creds
 .env

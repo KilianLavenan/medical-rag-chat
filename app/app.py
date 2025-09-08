@@ -54,14 +54,13 @@ def generate_response(message: str, history: list[tuple[str, str]]) -> str:
 def main() -> None:
     st.title("🩺 Medical RAG Chatbot")
     st.markdown("Assistant médical spécialisé dans les pneumopathies communautaires")
+    chroma_db_path = Path("data/chroma_db")
+    if chroma_db_path.exists():
+        st.session_state.indexing_initialized = True
 
     if "indexing_initialized" not in st.session_state:
         with st.spinner("Initialisation du système RAG..."):
             st.session_state.indexing_initialized = init_indexing()
-
-    chroma_db_path = Path("data/chroma_db")
-    if chroma_db_path.exists():
-        st.session_state.indexing_initialized = True
 
     if not st.session_state.indexing_initialized:
         st.error("Impossible d'initialiser le système. Veuillez recharger la page.")

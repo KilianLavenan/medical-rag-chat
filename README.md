@@ -33,7 +33,7 @@ This repository demonstrates a complete RAG implementation:
 ## ⚙️ Installation
 
 1. Clone the repository:
-   git clone https://github.com/your-username/medical-rag-chat.git
+   git clone https://github.com/KilianLavenan/medical-rag-chat.git
    cd medical-rag-chat
 2. Install dependencies using uv:
     uv sync
@@ -65,7 +65,7 @@ https://kilianlavenan-medical-rag-chat-appapp-pk464n.streamlit.app/
 The chatbot will launch directly in your browser with the streamlit interface.
 No installation required, just type your medical question and get an answer.
 
-On Spaces, the embeddings are precomputed so you can start chatting immediately.
+On Streamlit, the embeddings are precomputed so you can start chatting immediately.
 
 
 ## ❓ Demonstration Questions

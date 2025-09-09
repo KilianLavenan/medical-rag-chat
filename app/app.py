@@ -24,23 +24,20 @@ def init_indexing() -> bool:
         return False
 
 
-def generate_response(message: str, history: list[tuple[str, str]]) -> str:
+def generate_response(message: str, history: list[dict[str, str]]) -> str:
     """
     Handle a conversational turn with memory using the OpenAI chat model.
     Args:
         message (str): The latest user message.
-        history (list[tuple[str, str]]): Conversation history where each tuple
-            is (user_message, assistant_response).
+        history (list[dict[str, str]]): Conversation history where each dict
+            contains "user_message" and "assistant_response".
 
     Returns:
         str: The assistant's response to the current user message.
     """
     context = "Tu es un assistant médical qui est entraîné à répondre à des questions sur les pneumopathies communautaires.\n\n"
     messages = [{"role": "system", "content": context}]
-
-    for user_msg, bot_msg in history:
-        messages.append({"role": "user", "content": user_msg})
-        messages.append({"role": "assistant", "content": bot_msg})
+    messages.extend(history)
     prompt = query.build_prompt(message)
     messages.append({"role": "user", "content": prompt})
     response = client.chat.completions.create(
